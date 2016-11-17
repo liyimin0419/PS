@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="varchar" MaxLength="20" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Url" Type="varchar" MaxLength="50" />
+          <Property Name="Icon" Type="varchar" MaxLength="10" />
+          <Property Name="OrderIndex" Type="float" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“PSS.dbo.v_InDepot”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_InDepot">
+          <Key>
+            <PropertyRef Name="InNo" />
+          </Key>
+          <Property Name="InNo" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="DepotID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="BusinessID" Type="int" />
+          <Property Name="OperationID" Type="int" />
+          <Property Name="Money" Type="money" />
+          <Property Name="State" Type="int" />
+          <Property Name="AuditID" Type="int" />
+          <Property Name="AuditTime" Type="datetime" />
+          <Property Name="AuditError" Type="varchar" MaxLength="100" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="DepotName" Type="varchar" MaxLength="20" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="50" />
+          <Property Name="EmpName" Type="varchar" MaxLength="20" />
+          <Property Name="eName" Type="varchar" MaxLength="20" />
+          <Property Name="fName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“PSS.dbo.v_OutDepot”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="v_OutDepot">
+          <Key>
+            <PropertyRef Name="OutID" />
+          </Key>
+          <Property Name="OutID" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="DepotID" Type="int" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="BusinessID" Type="int" />
+          <Property Name="OperationID" Type="int" />
+          <Property Name="Money" Type="money" />
+          <Property Name="State" Type="int" />
+          <Property Name="AuditID" Type="int" />
+          <Property Name="AuditTime" Type="datetime" />
+          <Property Name="AuditError" Type="varchar" MaxLength="100" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="DepotName" Type="varchar" MaxLength="20" />
+          <Property Name="ClientName" Type="varchar" MaxLength="50" />
+          <Property Name="EmpName" Type="varchar" MaxLength="20" />
+          <Property Name="eName" Type="varchar" MaxLength="20" />
+          <Property Name="fName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityContainer Name="PSSModelStoreContainer">
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_InDepot" EntityType="Self.v_InDepot" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_InDepot].[InNo] AS [InNo], 
+    [v_InDepot].[CreateTime] AS [CreateTime], 
+    [v_InDepot].[DepotID] AS [DepotID], 
+    [v_InDepot].[SupplierID] AS [SupplierID], 
+    [v_InDepot].[BusinessID] AS [BusinessID], 
+    [v_InDepot].[OperationID] AS [OperationID], 
+    [v_InDepot].[Money] AS [Money], 
+    [v_InDepot].[State] AS [State], 
+    [v_InDepot].[AuditID] AS [AuditID], 
+    [v_InDepot].[AuditTime] AS [AuditTime], 
+    [v_InDepot].[AuditError] AS [AuditError], 
+    [v_InDepot].[Remark] AS [Remark], 
+    [v_InDepot].[DepotName] AS [DepotName], 
+    [v_InDepot].[SupplierName] AS [SupplierName], 
+    [v_InDepot].[EmpName] AS [EmpName], 
+    [v_InDepot].[eName] AS [eName], 
+    [v_InDepot].[fName] AS [fName]
+    FROM [dbo].[v_InDepot] AS [v_InDepot]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_OutDepot" EntityType="Self.v_OutDepot" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_OutDepot].[OutID] AS [OutID], 
+    [v_OutDepot].[CreateTime] AS [CreateTime], 
+    [v_OutDepot].[DepotID] AS [DepotID], 
+    [v_OutDepot].[ClientID] AS [ClientID], 
+    [v_OutDepot].[BusinessID] AS [BusinessID], 
+    [v_OutDepot].[OperationID] AS [OperationID], 
+    [v_OutDepot].[Money] AS [Money], 
+    [v_OutDepot].[State] AS [State], 
+    [v_OutDepot].[AuditID] AS [AuditID], 
+    [v_OutDepot].[AuditTime] AS [AuditTime], 
+    [v_OutDepot].[AuditError] AS [AuditError], 
+    [v_OutDepot].[Remark] AS [Remark], 
+    [v_OutDepot].[DepotName] AS [DepotName], 
+    [v_OutDepot].[ClientName] AS [ClientName], 
+    [v_OutDepot].[EmpName] AS [EmpName], 
+    [v_OutDepot].[eName] AS [eName], 
+    [v_OutDepot].[fName] AS [fName]
+    FROM [dbo].[v_OutDepot] AS [v_OutDepot]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PSSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Icon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OrderIndex" Type="Double" />
+          <Property Name="Deleted" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="PSSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="v_InDepot" EntityType="PSSModel.v_InDepot" />
+          <EntitySet Name="v_OutDepot" EntityType="PSSModel.v_OutDepot" />
+          </EntityContainer>
+        <EntityType Name="v_InDepot">
+          <Key>
+            <PropertyRef Name="InNo" />
+          </Key>
+          <Property Name="InNo" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DepotID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="BusinessID" Type="Int32" />
+          <Property Name="OperationID" Type="Int32" />
+          <Property Name="Money" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="AuditID" Type="Int32" />
+          <Property Name="AuditTime" Type="DateTime" Precision="3" />
+          <Property Name="AuditError" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DepotName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="eName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="v_OutDepot">
+          <Key>
+            <PropertyRef Name="OutID" />
+          </Key>
+          <Property Name="OutID" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DepotID" Type="Int32" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="BusinessID" Type="Int32" />
+          <Property Name="OperationID" Type="Int32" />
+          <Property Name="Money" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="AuditID" Type="Int32" />
+          <Property Name="AuditTime" Type="DateTime" Precision="3" />
+          <Property Name="AuditError" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DepotName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ClientName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="eName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PSSModelStoreContainer" CdmEntityContainer="PSSEntities">
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="PSSModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="OrderIndex" ColumnName="OrderIndex" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_InDepot">
+            <EntityTypeMapping TypeName="PSSModel.v_InDepot">
+              <MappingFragment StoreEntitySet="v_InDepot">
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="eName" ColumnName="eName" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="DepotName" ColumnName="DepotName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AuditError" ColumnName="AuditError" />
+                <ScalarProperty Name="AuditTime" ColumnName="AuditTime" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="DepotID" ColumnName="DepotID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="InNo" ColumnName="InNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_OutDepot">
+            <EntityTypeMapping TypeName="PSSModel.v_OutDepot">
+              <MappingFragment StoreEntitySet="v_OutDepot">
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="eName" ColumnName="eName" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="DepotName" ColumnName="DepotName" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AuditError" ColumnName="AuditError" />
+                <ScalarProperty Name="AuditTime" ColumnName="AuditTime" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="DepotID" ColumnName="DepotID" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="OutID" ColumnName="OutID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
